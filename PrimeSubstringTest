@@ -1,0 +1,42 @@
+package com.overriding.concepts;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class PrimeSubstringTest {
+
+	public static void main(String[] args) {
+		new PrimeSubstringTest().getAllSubStringCombinations("11373").forEach(str->System.out.println(str));
+		
+	}
+
+	private  List<String> getAllSubStringCombinations(String string) {
+		// TODO Auto-generated method stub
+		if(string.length()==1) {
+			List<String> li = new ArrayList<String>();
+			li.add(string);
+			return li;
+			}
+		else if (string.length()==2) {
+			List<String> li = new ArrayList<String>();
+			li.add(string);
+			li.add(string.charAt(0)+","+string.charAt(1));
+			return li;
+		}
+		else {
+			List<String> finalList=new ArrayList<>();
+			finalList.add(string);
+			for(int i=1;i<string.length();i++) {
+				List<String> l1=getAllSubStringCombinations(string.substring(0, i));
+				List<String> l2=getAllSubStringCombinations(string.substring(i));			
+				l1.forEach(str ->{l2.forEach(str2->{finalList.add(str+","+str2);});});
+			}
+			return finalList.stream().distinct().collect(Collectors.toList());
+		}
+	}
+
+}
