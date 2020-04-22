@@ -1,0 +1,35 @@
+package com.overriding.concepts;
+
+public class ApproximateMatching {
+
+	public static void main(String[] args) {
+
+		//String prefixScore=getMaxSubstring("raven","engine");
+		//String prefixScore=getMaxSubstring("bruno","nothing");
+		String prefixScore=getMaxSubstring("a","ab");
+		System.out.println("***************************************************************");
+		//String suffixScore=getMaxSubstring("ginkgo","engine");
+		//String suffixScore=getMaxSubstring("ingenious","nothing");
+		String suffixScore=getMaxSubstring("b","ab");
+		
+		System.out.println("Prefix score -->"+prefixScore);
+		System.out.println("Suffix score -->"+suffixScore);
+	}
+
+	private static String getMaxSubstring(String prefix, String originalString) {
+		String maxSubstring="";
+		if(prefix.equals(originalString)) {
+			return prefix;
+		}
+		for(int i=prefix.length();i>=1;i--) {
+			for(int j=0;j<=prefix.length()-i;j++) {
+				String currentSubstring=prefix.substring(j,j+i);
+				System.out.println("Current Substring is -->"+currentSubstring);
+				if(originalString.contains(currentSubstring)) {
+					return currentSubstring;
+				}
+			}
+		}
+		return maxSubstring;
+	}
+}
